@@ -1,0 +1,8 @@
+{
+  "name": "Dutch Language Tutor J.𓅃",
+  "description": "An interactive AI-powered application for Spanish speakers to learn and practice Dutch conversation, structured by CEFR language levels (A1-C2), using Gemini's real-time audio capabilities.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ]
+}

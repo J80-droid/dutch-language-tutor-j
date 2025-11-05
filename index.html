@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dutch Language Tutor J.𓅃</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root, [data-theme="sky"] {
+        /* Base Dark Theme with Sky Accents */
+        --color-bg: #0f172a; /* slate-900 */
+        --color-secondary-bg: #1e293b; /* slate-800 */
+        --color-text: #f8fafc; /* slate-50 */
+        --color-border: #334155; /* slate-700 */
+        --color-secondary: #334155; /* slate-700 */
+        --color-model-bg: #334155; /* slate-700 */
+        
+        --color-primary: #0ea5e9; /* sky-500 */
+        --color-primary-text: #ffffff;
+        --color-user-bg: #0369a1; /* sky-700 */
+      }
+      [data-theme="rose"] {
+        --color-primary: #f43f5e; /* rose-500 */
+        --color-user-bg: #be123c; /* rose-700 */
+      }
+      [data-theme="emerald"] {
+        --color-primary: #10b981; /* emerald-500 */
+        --color-user-bg: #047857; /* emerald-700 */
+      }
+      [data-theme="violet"] {
+        --color-primary: #8b5cf6; /* violet-500 */
+        --color-user-bg: #6d28d9; /* violet-700 */
+      }
+      [data-theme="amber"] {
+        --color-primary: #f59e0b; /* amber-500 */
+        --color-user-bg: #b45309; /* amber-700 */
+      }
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
