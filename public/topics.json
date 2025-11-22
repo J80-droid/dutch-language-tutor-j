@@ -1,0 +1,34 @@
+{
+  "A1": [
+    {
+      "theme": "Dagelijkse routine",
+      "starter": "Hoe ziet jouw ochtend er meestal uit?",
+      "followUps": [
+        "Welke activiteiten doe je voor je het huis verlaat?",
+        "Welke woorden vind je nog lastig om je routine te beschrijven?",
+        "Vraag om een beschrijving van de belangrijkste woorden in eenvoudige taal."
+      ],
+      "difficulty": "intro",
+      "keywords": ["opstaan", "ontbijt", "tijd", "werk", "school"],
+      "culturalNotes": "Leg eenvoudige verschillen uit tussen Nederlandse en Spaanse ochtendgewoontes."
+    }
+  ],
+  "A2": [
+    {
+      "theme": "Eten en koken",
+      "starter": "Wat is jouw favoriete gerecht om te koken of te eten?",
+      "followUps": [
+        "Welke ingrediënten gebruik je meestal?",
+        "Vergelijk het gerecht met iets typisch Spaans en vraag om verschillen.",
+        "Nodig de leerling uit om een eenvoudige instructie te geven."
+      ],
+      "difficulty": "basic",
+      "keywords": ["recept", "ingredienten", "keuken", "koken", "eten"]
+    }
+  ],
+  "B1": [],
+  "B2": [],
+  "C1": [],
+  "C2": []
+}
+

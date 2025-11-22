@@ -1,0 +1,236 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 16px;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-secondary-bg);
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.statusRow {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  color: var(--color-text);
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.recordingStatus {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--color-primary-text);
+  width: 100%;
+  max-width: 500px;
+}
+
+.recordingTalkBar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.recordingTalkBarContainer {
+  display: flex;
+  width: 100%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.recordingTalkSegmentUser {
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+  display: block;
+}
+
+.recordingTalkSegmentTutor {
+  background: var(--color-model-bg);
+  transition: width 0.3s ease;
+  display: block;
+}
+
+.recordingTalkLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75em;
+  opacity: 0.85;
+  gap: 8px;
+}
+
+.recordingTalkLabelUser,
+.recordingTalkLabelTutor {
+  white-space: nowrap;
+}
+
+.recordingIndicator {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.recordingPulse {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  animation: recordingIndicatorPulse 1.5s infinite ease-in-out;
+}
+
+.recordingLabel {
+  color: #ef4444;
+  letter-spacing: 0.02em;
+}
+
+.recordingTimer {
+  font-variant-numeric: tabular-nums;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.idleHint {
+  opacity: 0.7;
+  width: 100%;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  color: var(--color-primary-text);
+  transition: background-color 0.2s, transform 0.1s;
+  flex: 1 1 160px;
+  min-width: 140px;
+  max-width: 260px;
+}
+
+.buttonText {
+  display: block;
+}
+
+.startButton {
+  background-color: var(--color-primary);
+}
+
+.startButtonPulse {
+  animation: buttonPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.stopButton {
+  background-color: #d93025;
+}
+
+.endButton {
+  background-color: #5f6368;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.talkCard {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background-color: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.2);
+  box-sizing: border-box;
+}
+
+.talkHeader {
+  font-weight: 600;
+  font-size: 0.95em;
+  text-align: center;
+}
+
+.talkBar {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.talkSegmentUser {
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.talkSegmentTutor {
+  background: var(--color-model-bg);
+  transition: width 0.3s ease;
+}
+
+.talkLegend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+  opacity: 0.75;
+}
+
+.talkNotice {
+  font-size: 0.75em;
+  opacity: 0.65;
+  text-align: center;
+  line-height: 1.35;
+}
+
+@keyframes recordingIndicatorPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+

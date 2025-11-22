@@ -1,0 +1,66 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal {
+  background-color: var(--color-secondary-bg);
+  padding: 24px;
+  border-radius: 14px;
+  width: min(500px, 90vw);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.45);
+}
+
+.header {
+  margin: 0;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 10px;
+  text-transform: capitalize;
+}
+
+.content {
+  min-height: 50px;
+  margin-top: 12px;
+}
+
+.error {
+  color: #d9534f;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  margin-top: 16px;
+  margin-left: auto;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+}
+
+.closeButton:focus {
+  outline: none;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+

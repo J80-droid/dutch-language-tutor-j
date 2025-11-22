@@ -1,0 +1,76 @@
+.button {
+  position: fixed;
+  right: 18px;
+  bottom: 96px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-primary-text);
+  font-weight: 700;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, bottom 0.3s ease;
+  z-index: 1250;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.buttonRecording {
+  background: #ef4444;
+  color: #fff7ed;
+}
+
+.buttonRaised {
+  bottom: 280px;
+}
+
+.buttonPulse {
+  animation: buttonPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45), 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45), 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+}
+
+.label {
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 400px) {
+  .button {
+    right: 14px;
+    padding: 10px 14px;
+  }
+
+  .label {
+    font-size: 0.95rem;
+  }
+}
+

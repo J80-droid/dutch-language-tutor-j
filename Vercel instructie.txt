@@ -1,0 +1,9 @@
+cd "D:\A.I\APPS\Nieuwe map\dutch-language-tutor-j.𓅃"
+
+npm install
+
+npx vitest run
+
+npm run build
+
+powershell -ExecutionPolicy Bypass -File .\deploy-to-vercel.ps1
