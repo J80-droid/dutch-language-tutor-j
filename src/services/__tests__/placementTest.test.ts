@@ -6,12 +6,17 @@ import {
 } from '../placementTest';
 import type { CEFRLevel } from '@/types';
 
+// Hoist the mock function so it's available for the mock factory
+const mocks = vi.hoisted(() => ({
+    generateContent: vi.fn(),
+}));
+
 // Mock Gemini API
 vi.mock('@google/genai', () => {
     return {
         GoogleGenAI: vi.fn().mockImplementation(() => ({
             models: {
-                generateContent: vi.fn(),
+                generateContent: mocks.generateContent,
             },
         })),
         Type: {
@@ -26,6 +31,20 @@ vi.mock('@google/genai', () => {
 describe('placementTest', () => {
     beforeEach(() => {
         vi.clearAllMocks();
+        // Default success response
+        mocks.generateContent.mockResolvedValue({
+            text: () => JSON.stringify([
+                {
+                    id: 'test-q',
+                    type: 'multiple-choice',
+                    question: 'Test Question',
+                    options: ['A', 'B', 'C'],
+                    correctAnswer: 'A',
+                    explanation: 'Because A',
+                    level: 'A1'
+                }
+            ])
+        });
     });
 
     afterEach(() => {
@@ -65,9 +84,7 @@ describe('placementTest', () => {
     describe('generatePlacementQuestionsAsync', () => {
         it('valt terug op hardcoded vragen bij API fout', async () => {
             // Mock API om te falen
-            const { GoogleGenAI } = await import('@google/genai');
-            const mockAI = new GoogleGenAI({ apiKey: 'test' });
-            vi.mocked(mockAI.models.generateContent).mockRejectedValue(new Error('API error'));
+            mocks.generateContent.mockRejectedValue(new Error('API error'));
 
             const questions = await generatePlacementQuestionsAsync('A1');
             
@@ -156,4 +173,3 @@ describe('placementTest', () => {
         });
     });
 });
-

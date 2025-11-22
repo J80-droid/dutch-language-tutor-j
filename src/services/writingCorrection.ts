@@ -96,7 +96,7 @@ Format je antwoord duidelijk met kopjes.`;
         });
 
         // Parse response (vereenvoudigde versie - in productie zou dit beter geparsed worden)
-        return parseCorrectionResponse(response, userText);
+        return await parseCorrectionResponse(response, userText, exercise);
     } catch (error) {
         throw new Error(`Failed to correct writing: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -105,7 +105,7 @@ Format je antwoord duidelijk met kopjes.`;
 /**
  * Parse AI response naar gestructureerde feedback
  */
-function parseCorrectionResponse(response: string, originalText: string): WritingFeedback {
+async function parseCorrectionResponse(response: string, originalText: string, exercise: WritingExercise): Promise<WritingFeedback> {
     // Vereenvoudigde parsing - in productie zou dit robuuster moeten zijn
     const errors: WritingFeedback['errors'] = [];
     const correctedText = originalText;

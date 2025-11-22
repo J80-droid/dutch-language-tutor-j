@@ -1,12 +1,17 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { analyzeSpeech } from '../speechAnalysis';
 
+// Hoist the mock function
+const mocks = vi.hoisted(() => ({
+    generateContent: vi.fn(),
+}));
+
 // Mock Gemini API
 vi.mock('@google/genai', () => {
     return {
         GoogleGenAI: vi.fn().mockImplementation(() => ({
             models: {
-                generateContent: vi.fn(),
+                generateContent: mocks.generateContent,
             },
         })),
         Type: {
@@ -21,6 +26,23 @@ vi.mock('@google/genai', () => {
 describe('speechAnalysis', () => {
     beforeEach(() => {
         vi.clearAllMocks();
+        // Default success response
+        mocks.generateContent.mockResolvedValue({
+            text: () => JSON.stringify({
+                transcription: "Test transcript",
+                corrections: [],
+                vocabulary_score: 80,
+                grammar_score: 85,
+                fluency_score: 90,
+                overall_score: 85,
+                feedback: {
+                    vocabulary: ["Goede woordenschat"],
+                    grammar: ["Correcte grammatica"],
+                    fluency: ["Vloeiend gesproken"],
+                    pronunciation: ["Duidelijke uitspraak"]
+                }
+            })
+        });
     });
 
     afterEach(() => {
@@ -61,9 +83,7 @@ describe('speechAnalysis', () => {
 
         it('valt terug op heuristiek bij API fout', async () => {
             // Mock API om te falen
-            const { GoogleGenAI } = await import('@google/genai');
-            const mockAI = new GoogleGenAI({ apiKey: 'test' });
-            vi.mocked(mockAI.models.generateContent).mockRejectedValue(new Error('API error'));
+            mocks.generateContent.mockRejectedValue(new Error('API error'));
 
             const transcript = 'Dit is een test transcript met enkele woorden';
             const result = await analyzeSpeech(transcript);
@@ -98,4 +118,3 @@ describe('speechAnalysis', () => {
         });
     });
 });
-

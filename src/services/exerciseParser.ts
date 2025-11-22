@@ -142,7 +142,7 @@ async function extractAnswerWithGemini(
 /**
  * Parse markdown tekst naar gestructureerde oefening data
  */
-export function parseExerciseText(text: string): ExerciseData | null {
+export async function parseExerciseText(text: string): Promise<ExerciseData | null> {
     // Reset Gemini call count voor nieuwe parsing sessie
     geminiCallCount = 0;
     try {
@@ -637,7 +637,7 @@ export function parseExerciseText(text: string): ExerciseData | null {
         }
 
         // Voeg correcte antwoorden toe aan vragen
-        questions.forEach((q, index) => {
+        for (const [index, q] of questions.entries()) {
             const answerData = answersMap.get(index + 1);
             if (answerData && answerData.answer && answerData.answer !== '[Antwoord niet gevonden in gegenereerde tekst]') {
                 q.correctAnswer = answerData.answer;
@@ -700,7 +700,7 @@ export function parseExerciseText(text: string): ExerciseData | null {
                     }
                 }
             }
-        });
+        }
 
         // Zorg dat we precies 10 vragen hebben (vul aan of trim)
         const finalQuestions = questions.slice(0, 10);

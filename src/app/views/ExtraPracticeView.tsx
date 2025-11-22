@@ -531,28 +531,39 @@ const ExtraPracticeView: React.FC = () => {
     const [showCategoryView, setShowCategoryView] = useState(false);
 
     useEffect(() => {
-        const loaded = loadStoredResults();
-        // Parse oude tekst-gebaseerde resultaten naar gestructureerde data indien nodig
-        const updated: StoredResultMap = {};
-        Object.keys(loaded).forEach(key => {
-            const result = loaded[key as ExtraExerciseId];
-            if (result) {
-                if (result.text && !result.exerciseData) {
-                    const exerciseData = parseExerciseText(result.text);
-                    if (exerciseData) {
-                        updated[key as ExtraExerciseId] = {
-                            ...result,
-                            exerciseData,
-                        };
+        const loadAndMigrate = async () => {
+            const loaded = loadStoredResults();
+            // Parse oude tekst-gebaseerde resultaten naar gestructureerde data indien nodig
+            const updated: StoredResultMap = {};
+            let hasUpdates = false;
+
+            for (const key of Object.keys(loaded)) {
+                const result = loaded[key as ExtraExerciseId];
+                if (result) {
+                    if (result.text && !result.exerciseData) {
+                        const exerciseData = await parseExerciseText(result.text);
+                        if (exerciseData) {
+                            updated[key as ExtraExerciseId] = {
+                                ...result,
+                                exerciseData,
+                            };
+                            hasUpdates = true;
+                        } else {
+                            updated[key as ExtraExerciseId] = result;
+                        }
                     } else {
                         updated[key as ExtraExerciseId] = result;
                     }
-                } else {
-                    updated[key as ExtraExerciseId] = result;
                 }
             }
-        });
-        setResults(updated);
+            
+            if (hasUpdates) {
+                setResults(prev => ({ ...prev, ...updated }));
+            } else {
+                setResults(loaded);
+            }
+        };
+        loadAndMigrate();
     }, []);
 
     useEffect(() => {
@@ -604,7 +615,6 @@ const ExtraPracticeView: React.FC = () => {
             return;
         }
 
-        let intervalId: NodeJS.Timeout;
         let timeoutId: NodeJS.Timeout;
         let currentProgress = 0;
 
@@ -619,7 +629,7 @@ const ExtraPracticeView: React.FC = () => {
         };
 
         // Update elke 200ms
-        intervalId = setInterval(updateProgress, 200);
+        const intervalId = setInterval(updateProgress, 200);
 
         // Cleanup
         return () => {
@@ -657,7 +667,7 @@ const ExtraPracticeView: React.FC = () => {
             await new Promise(resolve => setTimeout(resolve, 300));
 
             // Parse tekst naar gestructureerde data
-            const exerciseData = parseExerciseText(text);
+            const exerciseData = await parseExerciseText(text);
 
             setResults(prev => ({
                 ...prev,

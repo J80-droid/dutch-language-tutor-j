@@ -23,6 +23,7 @@ class FakeMediaStreamSource {
 
 class FakeAudioContext {
     public destination = {};
+    public state = 'suspended';
     createMediaStreamSource() {
         return new FakeMediaStreamSource();
     }
@@ -33,6 +34,14 @@ class FakeAudioContext {
         return {
             connect: vi.fn(),
         };
+    }
+    resume() {
+        this.state = 'running';
+        return Promise.resolve();
+    }
+    close() {
+        this.state = 'closed';
+        return Promise.resolve();
     }
 }
 
@@ -61,6 +70,9 @@ describe('useAudioController', () => {
 
         const fakeAudioTrack = {
             stop: vi.fn(),
+            readyState: 'live',
+            addEventListener: vi.fn(), // ADDED: mock addEventListener
+            removeEventListener: vi.fn(), // ADDED: mock removeEventListener
             getSettings: vi.fn(() => ({
                 noiseSuppression: true,
                 echoCancellation: true,
@@ -143,4 +155,3 @@ describe('useAudioController', () => {
         await expect(result.current.queueModelAudio('abc', 1)).resolves.toBe(0);
     });
 });
-
